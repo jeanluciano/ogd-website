@@ -10,20 +10,22 @@ const AppContainer = styled.div`
   flex-direction: row;
   width: 100vw;
   height: 100vh;
-  background-color: #c2ab8b;
+  background-color: ${props => (props.home ? "none" : "#ffffff")};
+  position: relative;
 `
 
 const Content = styled.div`
-
-width:100%;
+  font-family: "Assistant", sans-serif;
+  width: 100%;
 `
 
 const layout = props => {
+  console.log(props.path)
   return (
-    <AppContainer>
-      <Header />
+    <AppContainer home={props.path === "/" ? true : false}>
+      <Header path={props.path} />
       <Content>{props.children}</Content>
-      <Stripe />
+      <Stripe path={props.path} />
     </AppContainer>
   )
 }

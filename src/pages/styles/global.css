@@ -2,6 +2,7 @@
    v2.0 | 20110126
    License: none (public domain)
 */
+@import url('https://fonts.googleapis.com/css2?family=Assistant:wght@200;400;600;700&family=Raleway:wght@400;900&display=swap');
 
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
@@ -22,6 +23,7 @@ time, mark, audio, video {
 	font-size: 100%;
 	font: inherit;
 	vertical-align: baseline;
+	
 }
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure, 
@@ -50,108 +52,14 @@ table {
 
 /* -------------------------------------------------- */
 
-.logo{
-	width: 90%;
-}
 
 
-
-.splash{
-    display: flex;
-    box-sizing: border-box;
-    justify-content: space-between;
-    flex-direction: row;
-    background-image: url('../../../static/spalsh3.jpg');
-    width: 100vw;
-    height: 100vh;
-    background-position: center; /* Center the image */
-    background-repeat: no-repeat; /* Do not repeat the image */
-    background-size: cover;
-    background-origin: content-box;
-    background-color: #C2AB8B;
-    padding-left: 6.66%;
-    
-}
-
-.control {
-    background-color: black;
-    height: 13vh;
-    width: 46vw;
-    position: absolute;
-    top:40%;
-    right:0;
-    z-index: 0;
-}
 
 body {
 	background-color: #282828;
 }
 
-.arrow {
-	width: 3vmin;
-	height: 3vmin;
-	box-sizing: border-box;
-	position: absolute;
-	right:2%;
-    transform: rotate(45deg);
-}
 
-.arrow.left{
-    transform: rotate(225deg);
-    bottom: 0;
-}
-	
-	.arrow::before {
-		content: '';
-		width: 100%;
-		height: 100%;
-		border-width: .8vmin .8vmin 0 0;
-		border-style: solid;
-		border-color: #fafafa;
-		transition: .2s ease;
-		display: block;
-		transform-origin: 100% 0;
-	}
 
-	
-	.arrow:after {
-		content: '';
-		float: left;
-		position: relative;
-		top: -100%;
-		width: 100%;
-		height: 100%;
-		border-width: 0 .8vmin 0 0;
-		border-style: solid;
-		border-color: #fafafa;
-		transform-origin: 100% 0;
-		transition:.2s ease;
-	}
-	
-	.arrow:hover::after {
- 
-        transform: rotate(45deg)  translateX(-1px);;
-		border-color: orange;
-		height: 120%;
-	}
-	.arrow:hover::before {
-     
-		border-color: orange;
-		transform: scale(.9);
-		
-	}
-	
-
-.stripe-top {
-	text-align:center;
-}
-.stripe-top h1 {
-	font-weight: bolder;
-	font-size: 1.5rem;
-}
-
-.stripe-bottom {
-	transform: rotate(-90deg);
-}
 
 
