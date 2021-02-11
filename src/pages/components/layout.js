@@ -1,8 +1,8 @@
 import React from "react"
 import Header from "./Header"
 import Stripe from "./Stripe"
-import styled from "styled-components"
-
+import styled, { ThemeProvider } from "styled-components"
+import { GlobalStyle, theme } from '../global.js'
 const AppContainer = styled.div`
   display: flex;
   box-sizing: border-box;
@@ -12,21 +12,36 @@ const AppContainer = styled.div`
   height: 100vh;
   background-color: ${props => (props.home ? "none" : "#ffffff")};
   position: relative;
+  @media (max-width: 425px) {
+    flex-direction: column;
+  }
 `
 
 const Content = styled.div`
   font-family: "Assistant", sans-serif;
   width: 100%;
+  display:flex;
+  @media (max-width: 425px) {
+    flex-direction:column;
+  }
 `
 
+
 const layout = props => {
-  console.log(props.path)
+  const {path, children} = props
+  const physicalScreenWidth = window.screen.width * window.devicePixelRatio;
+  const homeAndMobile = ((physicalScreenWidth > 780) || (path !=='/'))
+
   return (
-    <AppContainer home={props.path === "/" ? true : false}>
-      <Header path={props.path} />
-      <Content>{props.children}</Content>
-      <Stripe path={props.path} />
+    <ThemeProvider theme={theme}>
+    <GlobalStyle/>
+      <AppContainer home={path === "/" ? true : false}>
+      <Header path={path} />
+      <Content>{children}</Content>
+      { homeAndMobile ? <Stripe path={path} /> :'' }
     </AppContainer>
+   </ThemeProvider>
+    
   )
 }
 export default layout

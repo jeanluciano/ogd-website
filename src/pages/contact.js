@@ -12,6 +12,11 @@ const SideImage = styled(props => <BackgroundImage {...props} />)`
   background-color: #1a1a1a;
   position: relative;
   margin-right: 6.6vw;
+  @media (max-width: 425px) {
+    width: 50%;
+    height: 100%;
+    margin-right: 0;
+  }
 `
 const FeaturedPicture = styled.div`
   min-width: 26.6vw;
@@ -28,24 +33,41 @@ const FeaturedPicture = styled.div`
     bottom: 10vh;
     left: 10%;
   }
+  @media (max-width: 425px) {
+    width: 100vw;
+    height: 32vh;
+    flex-direction: row;
+    h2 {
+      display: none;
+    }
+  }
+`
+const SideContent = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  margin: 1rem;
 `
 const ContactLinks = styled.div`
   width: 13.3vw;
   color: #ffffff;
-  margin-left:10%;
+  margin-left: 10%;
   display: flex;
-  flex-direction:column;
+  flex-direction: column;
   a {
     color: #ffffff;
     text-decoration: none;
     display: flex;
     justify-content: space-around;
-    
+
     font-size: 1.5rem;
   }
 
   span {
     margin: 0 3.3vw;
+  }
+  @media (max-width: 425px) {
+    width: 100%;
   }
 `
 const MainContent = styled.div`
@@ -58,6 +80,11 @@ const MainContent = styled.div`
 
   flex-wrap: wrap;
   padding-right: 6.6vw;
+  @media (max-width: ${({ theme }) => theme.mobile}) {
+    padding-right: 0;
+    align-items: center;
+    justify-content: space-around;
+  }
 `
 const MainTitle = styled.h2`
   font-size: 2.5rem;
@@ -71,12 +98,8 @@ const SideTitle = styled.h2`
   margin-left: 10%;
 `
 
-const GalleryContainer = styled.div`
-  display: flex;
-`
-
 const Form = styled.form`
-  width: 100%;
+  width: 90%;
   margin: 13.3vh 0;
   label {
     display: block;
@@ -90,6 +113,9 @@ const Form = styled.form`
     color: #ffffff;
     width: 33%;
     height: 3.3vh;
+  }
+  @media (max-width: ${({ theme }) => theme.mobile}) {
+    margin: 0 auto;
   }
 `
 const Input = styled.input`
@@ -123,8 +149,8 @@ const Contact = props => {
 
   return (
     <Layout path={props.location.pathname}>
-      <GalleryContainer>
-        <FeaturedPicture>
+      <FeaturedPicture>
+        <SideContent>
           <SideTitle>Contact</SideTitle>
           <ContactLinks>
             <a href="instagram.com">
@@ -134,30 +160,31 @@ const Contact = props => {
               <FontAwesomeIcon icon={faTwitter} /> <span>@Ogd_ </span>
             </a>
           </ContactLinks>
-          <SideImage
-            fluid={data.strapiContactImage.image.childImageSharp.fluid}
-          />
-        </FeaturedPicture>
-        <MainContent>
-          <MainTitle>Send Me a Message</MainTitle>
-          <Form>
-            <FormRow>
-              <div>
-                <label>Email</label>
-                <Input type="email" name="email" />
-              </div>
-              <div>
-                <label>Name</label>
-                <Input type="text" name="name" />
-              </div>
-            </FormRow>
+        </SideContent>
 
-            <label>Message</label>
-            <TextArea big type="text" name="message" />
-            <button>send</button>
-          </Form>
-        </MainContent>
-      </GalleryContainer>
+        <SideImage
+          fluid={data.strapiContactImage.image.childImageSharp.fluid}
+        />
+      </FeaturedPicture>
+      <MainContent>
+        <MainTitle>Send Me a Message</MainTitle>
+        <Form>
+          <FormRow>
+            <div>
+              <label>Email</label>
+              <Input type="email" name="email" />
+            </div>
+            <div>
+              <label>Name</label>
+              <Input type="text" name="name" />
+            </div>
+          </FormRow>
+
+          <label>Message</label>
+          <TextArea big type="text" name="message" />
+          <button>send</button>
+        </Form>
+      </MainContent>
     </Layout>
   )
 }

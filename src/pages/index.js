@@ -1,5 +1,6 @@
 import React, { useState } from "react"
 import Layout from "./components/layout"
+import Stripe from "./components/Stripe"
 import styled from "styled-components"
 import { graphql, useStaticQuery } from "gatsby"
 import BackgroundImage from "gatsby-background-image"
@@ -15,7 +16,7 @@ const MainPicture = styled(props => <BackgroundImage {...props} />)`
 const Control = styled.div`
   background-color: black;
   height: 13vh;
-  width: 46vw;
+  width: 53vw;
   position: absolute;
   top: 40%;
   right: 0;
@@ -23,6 +24,9 @@ const Control = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  @media (max-width: ${({ theme }) => theme.mobile}){
+    top: 60%;
+  }
 `
 
 const SideStripe = styled.div`
@@ -30,6 +34,10 @@ const SideStripe = styled.div`
   height: 100vh;
   background-color: #c1ab8b;
   position: absolute;
+  @media (max-width: 500px) {
+    display:none;
+    
+  }
 `
 const ArrowContainer = styled.div`
   height: 100%;
@@ -89,8 +97,10 @@ export default function Home(props) {
   const splashPictures = data.allStrapiImages.edges.filter(node => {
     return node.node.homePic
   })
+  const physicalScreenWidth = window.screen.width * window.devicePixelRatio;
 
-  const clickHanle = () => {
+  const clickHanle = () =>{
+  
     if (index === splashPictures.length - 1) {
       setIndex(0)
     } else {
@@ -106,6 +116,7 @@ export default function Home(props) {
   }
 
   return (
+    <>
     <MainPicture fluid={splashPictures[index].node.url.childImageSharp.fluid}>
       <SideStripe />
       <Layout path={props.location.pathname}>
@@ -119,6 +130,8 @@ export default function Home(props) {
         </Control>
       </Layout>
     </MainPicture>
+    {physicalScreenWidth < 770 ? <Stripe path={props.location.pathname} /> :'' }
+    </>
   )
 }
 const MainTitle = styled.h2`

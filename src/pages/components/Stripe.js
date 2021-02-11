@@ -11,6 +11,11 @@ const FooterBar = styled.footer`
   margin-right: ${prop=> prop.home ? '6.66vw' :'0'  };
   z-index: 1;
   align-items: center;
+  @media (max-width: 425px) {
+    flex-direction: row;
+    height: 20vh;
+    width: 100vw;
+  }
 `
 const FooterTop = styled.div`
 	text-align:center;
@@ -20,6 +25,9 @@ const FooterTop = styled.div`
 	font-weight: 800;
 	font-size: 1.5rem;
 }
+@media (max-width: 425px) {
+    margin: 0;
+  }
 
 `
 const FooterBottom = styled.div`
@@ -33,10 +41,14 @@ const FooterBottom = styled.div`
     text-decoration:none;
     color:#1a1a1a;
   }
+  @media (max-width: 425px) {
+    transform:rotate(0);
+    margin-bottom:0;
+  }
 `
 
 export default function Stripe(props) {
-  console.log()
+
   return (
     <FooterBar home={props.path=== '/' ? true : false}>
       <FooterTop>

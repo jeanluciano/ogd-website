@@ -6,9 +6,6 @@ import Lightbox from "react-image-lightbox"
 import Img from "gatsby-image"
 import "react-image-lightbox/style.css"
 
-const GalleryContainer = styled.div`
-  display: flex;
-`
 const FeaturedPicture = styled.div`
   min-width: 26.6vw;
   height: 100vh;
@@ -19,6 +16,12 @@ const FeaturedPicture = styled.div`
     position: absolute;
     bottom: 8vh;
     left: 10%;
+  }
+  @media (max-width: 425px) {
+    display: flex;
+    width: 100vw;
+    height: 32vh;
+    flex-direction: row-reverse;
   }
 `
 const Hr = styled.hr`
@@ -39,11 +42,19 @@ const Pictures = styled.div`
   justify-content: space-between;
   flex-wrap: wrap;
   padding-right: 6.6vw;
+  @media (max-width: 425px) {
+    max-width: 100vw;
+  }
 `
 const FeaturedTitle = styled.h2`
   font-size: 3rem;
   color: #ffffff;
   margin: 10%;
+  @media (max-width: 425px) {
+    flex:1;
+    font-size: 1.8rem;
+    margin-top: 15%;
+  }
 `
 
 const Title = styled.h3`
@@ -51,7 +62,7 @@ const Title = styled.h3`
 `
 const PictureCard = styled.div`
   min-width: 13.3vw;
-  max-width: 13.3vw;
+  width: 13.3vw;
   height: 350px;
 
   margin-left: 6.6vw;
@@ -60,6 +71,9 @@ const PictureCard = styled.div`
   flex-direction: column;
   justify-content: space-between;
   font-size: 2rem;
+  @media (max-width: 425px) {
+    width: 40vw;
+  }
 `
 const StyledImage = styled(props => <Img {...props} />)`
   width: auto;
@@ -68,6 +82,10 @@ const StyledImage = styled(props => <Img {...props} />)`
 const StyledfImage = styled(props => <Img {...props} />)`
   width: auto;
   height: 50%;
+  @media (max-width: 425px) {
+    width: 50%;
+    height: 100%;
+  }
 `
 
 const GalleryPage = props => {
@@ -106,31 +124,30 @@ const GalleryPage = props => {
   }
   return (
     <Layout path={props.location.pathname}>
-      <GalleryContainer>
-        <FeaturedPicture onClick={clickHanle}>
-          <StyledfImage fluid={fullFeatured} />
-          <FeaturedTitle>{featuredPictures[featured].node.title}</FeaturedTitle>
-          <p>Featured work</p>
-        </FeaturedPicture>
-        <Pictures>
-          {indexedPictures.map((node, idx) => {
-            return (
-              <PictureCard
-                onClick={() => {
-                  setIsOpen(true)
-                  setIndex(idx)
-                }}
-              >
-                <StyledImage
-                  fluid={node.node.url.childImageSharp.thumb}
-                ></StyledImage>
-                <Title>{node.node.title}</Title>
-                <Hr />
-              </PictureCard>
-            )
-          })}
-        </Pictures>
-      </GalleryContainer>
+      <FeaturedPicture onClick={clickHanle}>
+        <StyledfImage fluid={fullFeatured} />
+        <FeaturedTitle>{featuredPictures[featured].node.title}</FeaturedTitle>
+        <p>Featured work</p>
+      </FeaturedPicture>
+      <Pictures>
+        {indexedPictures.map((node, idx) => {
+          return (
+            <PictureCard
+              onClick={() => {
+                setIsOpen(true)
+                setIndex(idx)
+              }}
+            >
+              <StyledImage
+                fluid={node.node.url.childImageSharp.thumb}
+              ></StyledImage>
+              <Title>{node.node.title}</Title>
+              <Hr />
+            </PictureCard>
+          )
+        })}
+      </Pictures>
+
       {isOpen && (
         <Lightbox
           mainSrc={indexedPictures[index].node.url.childImageSharp.full.src}

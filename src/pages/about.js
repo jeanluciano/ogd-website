@@ -15,6 +15,14 @@ const SideContent = styled(props => <BackgroundImage {...props} />)`
     bottom: 10vh;
     left: 10%;
   }
+  @media (max-width: 425px) {
+    width: 100vw;
+    height: 26vh;
+    flex-direction:row;
+    h2 {
+      display:none;
+    }
+  }
 `
 
 const MainContent = styled.div`
@@ -27,11 +35,19 @@ const MainContent = styled.div`
   justify-content: space-between;
   flex-wrap: wrap;
   padding-right: 6.6vw;
+  @media (max-width: 425px) {
+    width: 100vw;
+    flex-direction:column;
+    p {
+      margin: 25px 20px;
+    }
+    h2 {
+      margin: 25px 10px;
+    }
+  }
 `
 
-const Container = styled.div`
-  display: flex;
-`
+
 const SideTitle = styled.h2`
   font-size: 3rem;
   color: #ffffff;
@@ -58,7 +74,7 @@ const About = props => {
   console.log()
   return (
     <Layout path={props.location.pathname}>
-      <Container>
+    
         <SideContent fluid={data.strapiAboutImage.image.childImageSharp.fluid}>
           <SideTitle>About</SideTitle>
         </SideContent>
@@ -70,7 +86,7 @@ const About = props => {
           </MainTitle>
           <MainText>{mockText}</MainText>
         </MainContent>
-      </Container>
+    
     </Layout>
   )
 }

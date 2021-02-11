@@ -1,17 +1,22 @@
-import React from "react"
+import React, { useState } from "react"
 import styled from "styled-components"
 import Logo from "./logo"
+import Burger from "./Burger"
+import Menu from "./Menu"
 import AniLink from "gatsby-plugin-transition-link/AniLink"
 
 export default function Header(props) {
   const { path } = props
+  const [open, setOpen] = useState(false)
   return (
     <Navbar home={path === "/" ? true : false}>
       <AniLink swipe direction={"down"} to="/">
         <StyledLogo />
       </AniLink>
-
-      <NavLinks>
+      <Burger open={open} setOpen={setOpen} />
+      <MobileTitle>{path}</MobileTitle>
+      
+      <NavLinks open={open} home={path === "/"}>
         <StyledLink
           swipe
           direction={"up"}
@@ -36,6 +41,14 @@ export default function Header(props) {
         >
           gallery
         </StyledLink>
+        <StyledLink
+          swipe
+          direction={"down"}
+          to="/"
+          className={` ${path === "/" ? "active" : ""}`}
+        >
+          home
+        </StyledLink>
       </NavLinks>
     </Navbar>
   )
@@ -54,13 +67,58 @@ const Navbar = styled.div`
   font-family: "Raleway", sans-serif;
   a {
     margin-top: 10vh;
-    width: 80%;
+    width: 3rem;
+    height: auto;
+  }
+  @media (max-width: 425px) {
+    width: 0;
+    height: 0;
+    flex-direction: row;
+    margin-left: 0;
+    padding-left: 0;
   }
 `
 const StyledLogo = styled(props => <Logo {...props} />)``
 const NavLinks = styled.nav`
-  transform: rotate(-90deg);
-  margin: 20vh 0%;
+  transform: translateX(-50%) translateY(-50%) rotate(-90deg);
+
+  margin: 12vh 0;
+  width: 60vh;
+
+  position: absolute;
+  top: 50%;
+  left: ${prop => (prop.home ? "50%" : "20%")};
+  @media (max-width: ${({ theme }) => theme.mobile}) {
+    transform: rotate(0);
+    margin: 0;
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: flex-end;
+    background: ${({ theme }) => theme.primaryLight};
+    height: 100vh;
+    text-align: left;
+    padding: 2rem;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: transform 0.3s ease-in-out;
+    transform: ${props => (props.open ? "translateX(0)" : "translateX(-100%)")};
+    width: 100vw;
+    z-index: 6;
+  }
+`
+const MobileTitle = styled.h1`
+  font-size: 1.4rem;
+  color: #ffffff;
+  margin: 10%;
+  position: absolute;
+  top: 0.4rem;
+  left: 3.5rem;
+  z-index: 10;
+  margin: 15px;
+  @media (min-width: 700px){
+    display:none;
+  }
 `
 const StyledLink = styled(props => <AniLink {...props} />)`
   text-decoration: none;
