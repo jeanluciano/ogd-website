@@ -2,7 +2,7 @@ import React from "react"
 import Header from "./Header"
 import Stripe from "./Stripe"
 import styled, { ThemeProvider } from "styled-components"
-import { GlobalStyle, theme } from '../global.js'
+import { GlobalStyle, theme } from '../styles/global'
 const AppContainer = styled.div`
   display: flex;
   box-sizing: border-box;
