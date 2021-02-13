@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import Layout from "./components/layout"
 import Stripe from "./components/Stripe"
 import styled from "styled-components"
@@ -94,11 +94,14 @@ const Arrow = styled.div`
 export default function Home(props) {
   const data = useStaticQuery(query)
   const [index, setIndex] = useState(0)
+  const [physicalScreenWidth, setphysicalScreenWidth] = useState(0)
   const splashPictures = data.allStrapiImages.edges.filter(node => {
     return node.node.homePic
   })
-  const physicalScreenWidth = window.screen.width * window.devicePixelRatio;
-
+ 
+  useEffect(()=>{
+   setphysicalScreenWidth(window.screen.width * window.devicePixelRatio) 
+  },[])
   const clickHanle = () =>{
   
     if (index === splashPictures.length - 1) {

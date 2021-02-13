@@ -2,7 +2,6 @@ import React, { useState } from "react"
 import styled from "styled-components"
 import Logo from "./logo"
 import Burger from "./Burger"
-import Menu from "./Menu"
 import AniLink from "gatsby-plugin-transition-link/AniLink"
 
 export default function Header(props) {

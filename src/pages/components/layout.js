@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useEffect, useState } from "react"
 import Header from "./Header"
 import Stripe from "./Stripe"
 import styled, { ThemeProvider } from "styled-components"
@@ -29,8 +29,13 @@ const Content = styled.div`
 
 const layout = props => {
   const {path, children} = props
-  const physicalScreenWidth = window.screen.width * window.devicePixelRatio;
-  const homeAndMobile = ((physicalScreenWidth > 780) || (path !=='/'))
+  
+  const [homeAndMobile, setHomeAndMobile] = useState(false);
+  useEffect(()=>{
+    const physicalScreenWidth = window.screen.width * window.devicePixelRatio;
+    setHomeAndMobile((physicalScreenWidth > 780) || (path !=='/'))
+  },[])
+  
 
   return (
     <ThemeProvider theme={theme}>
