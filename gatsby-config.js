@@ -20,7 +20,7 @@ module.exports = {
     {
       resolve: "gatsby-source-strapi",
       options: {
-        apiURL: "http://localhost:1337",
+        apiURL: 'https://ogd-backend.herokuapp.com',
         contentTypes: ["images", "tags"],
         singleTypes: ["about-image", "contact-image"],
         queryLimit: 1000,
