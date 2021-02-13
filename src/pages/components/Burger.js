@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import React from 'react';
-import { theme } from '../global';
+
 
 
 const Burger = ({ open, setOpen }) => {
